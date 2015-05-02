@@ -44,9 +44,7 @@ var nwApp = {
 					if(nwApp.fiddleCheck(fiddle) === true){
 						dialog.close();
 						$('#loading').fadeIn();
-						$('#jsfiddle').attr('src', fiddle).load(function(){
-							nwApp.addActions(this, win);
-						});
+						$('#jsfiddle').attr('src', fiddle);
 					}
 				}
 			}, {
