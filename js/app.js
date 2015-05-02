@@ -5,9 +5,8 @@ var nwApp = {
 		var win = gui.Window.get();
 		nwApp.addMenu(document, gui);
 		$('#jsfiddle').load(function() {
-			var jsFiddle = $(this).contents();
-			nwApp.addActions(jsFiddle, win);
-			//nwApp.addMenu(jsFiddle, gui); //Bug: Context menu shows but doesn't work
+			nwApp.addActions(this, win);
+			nwApp.addMenu($(this)[0].contentWindow.document, gui);
 			$('#loading').fadeOut();
 		});
 		win.maximize();
@@ -21,7 +20,8 @@ var nwApp = {
 		});
 	},
 
-	addActions: function(jsFiddle, win) {
+	addActions: function(iframe, win) {
+		var jsFiddle = $(iframe).contents();
 		var actions = jsFiddle.find('.actionCont:eq(1)');
 		actions.prepend('<li class="actionItem"><a id="nw-open" class="aiButton" href="#nw-open" title="Open Fiddle"><span class="icon-file"></span>Open</a></li>');
 		actions.find('#nw-open').on('click', function() {
