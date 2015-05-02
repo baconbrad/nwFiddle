@@ -17,6 +17,17 @@ body, html {
 	right: 0;
 }
 
+#devtools {
+	z-index: 1;
+	width: 100%;
+	height: 0%;
+	border: 0;
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+
 #loading {
 	z-index: 9999;
 	border: 0px solid #999;

@@ -3,7 +3,7 @@
 	"description": "A quick, no thrills way to test NW.js code on jsFiddle",
 	"version": "0.1",
 	"main": "index.html",
-	"node-remote": "fiddle.jshell.net",
+	"node-remote": "fiddle.jshell.net,<local>",
 	"window": {
 		"toolbar": false,
 		"position": "center"

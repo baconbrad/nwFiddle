@@ -1,31 +1,31 @@
 var nwApp = {
 
-	runApp: function(){
+	runApp: function() {
 		var gui = require('nw.gui');
 		var win = gui.Window.get();
-		$('#jsfiddle').load(function(){
+		$('#jsfiddle').load(function() {
 			nwApp.addActions(this, win);
 		});
 		win.maximize();
 	},
 
-	addActions: function(iframe, win){
+	addActions: function(iframe, win) {
 		var jsFiddle = $(iframe).contents();
 		var actions = jsFiddle.find('.actionCont:eq(1)');
 		actions.prepend('<li class="actionItem"><a id="nw-open" class="aiButton" href="#nw-open" title="Open Fiddle"><span class="icon-file"></span>Open</a></li>');
-		actions.find('#nw-open').on('click', function(){
+		actions.find('#nw-open').on('click', function() {
 			nwApp.openAction(jsFiddle);
 		});
 		actions.append('<li class="actionItem"><a id="nw-sidebar" class="aiButton" href="#nw-sidebar" title="Toggle sidebar"><span class="icon-chevron-left"></span>Sidebar</a></li>');
-		actions.find('#nw-sidebar').on('click', function(){
+		actions.find('#nw-sidebar').on('click', function() {
 			nwApp.sidebarAction(jsFiddle);
 		});
 		actions.append('<li class="actionItem"><a id="nw-devtools" class="aiButton" href="#nw-devtools" title="Open dev tools"><span class="icon-cog"></span>Dev Tools</a></li>');
-		actions.find('#nw-devtools').on('click', function(){
+		actions.find('#nw-devtools').on('click', function() {
 			nwApp.devtoolsAction(win);
 		});
 		actions.append('<li class="actionItem"><a id="nw-zen" class="aiButton" href="#nw-zen" title="Zen Mode"><span class="icon-th-large"></span>Zen Mode</a></li>');
-		actions.find('#nw-zen').on('click', function(){
+		actions.find('#nw-zen').on('click', function() {
 			nwApp.zenAction(jsFiddle, win);
 		});
 		var credits = jsFiddle.find('.ebCont:last');
@@ -33,7 +33,7 @@ var nwApp = {
 		$('#loading').fadeOut();
 	},
 
-	openAction: function(jsFiddle){
+	openAction: function(jsFiddle) {
 		var dialog = BootstrapDialog.show({
 			title: 'Open Fiddle',
 			message: '<p>Enter a jsFiddle link you wish to open:</p><input type="text" class="form-control" id="nw-open-input" />',
@@ -41,7 +41,7 @@ var nwApp = {
 				label: 'Open',
 				action: function(dialog) {
 					var fiddle = $('#nw-open-input').val();
-					if(nwApp.fiddleCheck(fiddle) === true){
+					if(nwApp.fiddleCheck(fiddle) === true) {
 						dialog.close();
 						$('#loading').fadeIn();
 						$('#jsfiddle').attr('src', fiddle);
@@ -56,11 +56,11 @@ var nwApp = {
 		});
 	},
 
-	sidebarAction: function(jsFiddle){
+	sidebarAction: function(jsFiddle) {
 		var sidebar = jsFiddle.find('#sidebar');
 		var content = jsFiddle.find('#content');
 		var icon = jsFiddle.find('#nw-sidebar span');
-		if(icon.attr('class') == 'icon-chevron-left'){
+		if(icon.attr('class') == 'icon-chevron-left') {
 			sidebar.css('opacity', '0');
 			content.css('margin', '14px 15px 0 15px');
 			icon.attr('class', 'icon-chevron-right');
@@ -71,14 +71,25 @@ var nwApp = {
 		}
 	},
 
-	devtoolsAction: function(win){
-		win.showDevTools('jsfiddle');
+	devtoolsAction: function(win) {
+		if($('#devtools').height() == 0) {
+			$('#jsfiddle').css('height', '75%');
+			$('#devtools').css('height', '25%');
+			win.showDevTools('jsfiddle', true);
+			win.on("devtools-opened", function(url) {
+				$('#devtools').attr('src', url);
+				win.closeDevTools();
+			});
+		} else {
+			$('#jsfiddle').css('height', '100%');
+			$('#devtools').css('height', '0%');
+		}
 	},
 
-	zenAction: function(jsFiddle, win){
+	zenAction: function(jsFiddle, win) {
 		var sidebar = jsFiddle.find('#sidebar');
 		var icon = jsFiddle.find('#nw-zen span');
-		if(icon.attr('class') == 'icon-th-large'){
+		if(icon.attr('class') == 'icon-th-large') {
 			icon.attr('class', 'icon-remove');
 			win.enterFullscreen();
 		} else {
@@ -87,9 +98,9 @@ var nwApp = {
 		}
 	},
 
-	fiddleCheck: function(url){
+	fiddleCheck: function(url) {
 		//TODO: Better domain detection than indexOf
-		if(url.indexOf("jsfiddle.net") === -1){
+		if(url.indexOf("jsfiddle.net") === -1) {
 			var dialog = BootstrapDialog.show({
 				title: 'Invalid Fiddle',
 				type: BootstrapDialog.TYPE_DANGER,
