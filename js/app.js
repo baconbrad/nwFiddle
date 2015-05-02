@@ -22,6 +22,7 @@ var nwApp = {
 
 	addActions: function(iframe, win) {
 		var jsFiddle = $(iframe).contents();
+		jsFiddle.find('#branding').hide(); //Temp removed for real estate reasons and issue #3
 		var actions = jsFiddle.find('.actionCont:eq(1)');
 		actions.prepend('<li class="actionItem"><a id="nw-open" class="aiButton" href="#nw-open" title="Open Fiddle"><span class="icon-file"></span>Open</a></li>');
 		actions.find('#nw-open').on('click', function() {
