@@ -5,14 +5,16 @@
 nwFiddle is a quick, ~~no~~ some thrills way to test NW.js code on jsFiddle. Now you can have all the wonderful helpful features of jsFiddle to help aid you in prototyping and troubleshooting NW.js code.
 
 Features include:
-- Ability to use local files
-- Ability to test NW.js supported node.js/io.js code
-- Sidebar hiding
-- Zen Mode
-- Dev tool launcher
-- Ability to hack at the jsFiddle UI
-- Ability to extend jsFiddle's features
-- Everything jsFiddle has to offer
+* Ability to use local files
+* Ability to test NW.js supported node.js/io.js code
+* Sidebar hiding
+* Zen Mode
+* Dev tool launcher
+* Ability to hack at the jsFiddle UI*
+* Ability to extend jsFiddle's features*
+* Everything jsFiddle has to offer
+
+    \* Currently these can only be done by modifying the nwFiddle source
 
 ## Security Notice
 
