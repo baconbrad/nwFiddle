@@ -3,14 +3,25 @@ var nwApp = {
 	runApp: function() {
 		var gui = require('nw.gui');
 		var win = gui.Window.get();
+		nwApp.addMenu(document, gui);
 		$('#jsfiddle').load(function() {
-			nwApp.addActions(this, win);
+			var jsFiddle = $(this).contents();
+			nwApp.addActions(jsFiddle, win);
+			//nwApp.addMenu(jsFiddle, gui); //Bug: Context menu shows but doesn't work
+			$('#loading').fadeOut();
 		});
 		win.maximize();
 	},
 
-	addActions: function(iframe, win) {
-		var jsFiddle = $(iframe).contents();
+	addMenu: function (element, gui) {
+		var menu = nwApp.menu(element, gui);
+		$(element).on("contextmenu", function(e) {
+			e.preventDefault();
+			menu.popup(e.originalEvent.x, e.originalEvent.y);
+		});
+	},
+
+	addActions: function(jsFiddle, win) {
 		var actions = jsFiddle.find('.actionCont:eq(1)');
 		actions.prepend('<li class="actionItem"><a id="nw-open" class="aiButton" href="#nw-open" title="Open Fiddle"><span class="icon-file"></span>Open</a></li>');
 		actions.find('#nw-open').on('click', function() {
@@ -30,7 +41,6 @@ var nwApp = {
 		});
 		var credits = jsFiddle.find('.ebCont:last');
 		credits.append('<p><strong>nwFiddler</strong></p><p>Created and maintained by Brad Metcalf (brad@localabstract.com)<br />Github: baconface</p>');
-		$('#loading').fadeOut();
 	},
 
 	openAction: function(jsFiddle) {
@@ -99,8 +109,8 @@ var nwApp = {
 	},
 
 	fiddleCheck: function(url) {
-		//TODO: Better domain detection than indexOf
-		if(url.indexOf("jsfiddle.net") === -1) {
+		url = url.match(/^http.?:\/\/[^/]+/);
+		if(url == null || url[0].toLowerCase().indexOf("jsfiddle.net") === -1) {
 			var dialog = BootstrapDialog.show({
 				title: 'Invalid Fiddle',
 				type: BootstrapDialog.TYPE_DANGER,
@@ -115,6 +125,32 @@ var nwApp = {
 		} else {
 			return true;
 		}
+	},
+
+	menu: function(element, gui) {
+		var menu = new gui.Menu();
+		var cut = new gui.MenuItem({
+			label: "Cut", 
+			click: function() {
+				element.execCommand("cut");
+			}
+		});
+		var copy = new gui.MenuItem({
+			label: "Copy", 
+			click: function() {
+				element.execCommand("copy");
+			}
+		});
+		var paste = new gui.MenuItem({
+			label: "Paste",
+			click: function() {
+				element.execCommand("paste");
+			}
+		});
+		menu.append(cut);
+		menu.append(copy);
+		menu.append(paste);
+		return menu;
 	}
 
 };
