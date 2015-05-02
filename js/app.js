@@ -41,7 +41,7 @@ var nwApp = {
 			nwApp.zenAction(jsFiddle, win);
 		});
 		var credits = jsFiddle.find('.ebCont:last');
-		credits.append('<p><strong>nwFiddler</strong></p><p>Created and maintained by Brad Metcalf (brad@localabstract.com)<br />Github: baconface</p>');
+		credits.append('<p><strong>nwFiddle</strong></p><p>Created and maintained by Brad Metcalf (brad@localabstract.com)<br />Github: baconface</p>');
 	},
 
 	openAction: function(jsFiddle) {
