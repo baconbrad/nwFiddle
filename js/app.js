@@ -35,27 +35,27 @@ var nwApp = {
 
 	openAction: function(jsFiddle){
 		var dialog = BootstrapDialog.show({
-            title: 'Open Fiddle',
-            message: '<p>Enter a jsFiddle link you wish to open:</p><input type="text" class="form-control" id="nw-open-input" />',
-            buttons: [{
-                label: 'Open',
-                action: function(dialog) {
-                	var fiddle = $('#nw-open-input').val();
-                	if(nwApp.fiddleCheck(fiddle) === true){
-	                	dialog.close();
-	                	$('#loading').fadeIn();
-	                	$('#jsfiddle').attr('src', fiddle).load(function(){
+			title: 'Open Fiddle',
+			message: '<p>Enter a jsFiddle link you wish to open:</p><input type="text" class="form-control" id="nw-open-input" />',
+			buttons: [{
+				label: 'Open',
+				action: function(dialog) {
+					var fiddle = $('#nw-open-input').val();
+					if(nwApp.fiddleCheck(fiddle) === true){
+						dialog.close();
+						$('#loading').fadeIn();
+						$('#jsfiddle').attr('src', fiddle).load(function(){
 							nwApp.addActions(this, win);
 						});
 					}
-                }
-            }, {
-                label: 'Cancel',
-                action: function(dialog) {
-                    dialog.close();
-                }
-            }]
-        });
+				}
+			}, {
+				label: 'Cancel',
+				action: function(dialog) {
+					dialog.close();
+				}
+			}]
+		});
 	},
 
 	sidebarAction: function(jsFiddle){
@@ -93,16 +93,16 @@ var nwApp = {
 		//TODO: Better domain detection than indexOf
 		if(url.indexOf("jsfiddle.net") === -1){
 			var dialog = BootstrapDialog.show({
-	            title: 'Invalid Fiddle',
-	            type: BootstrapDialog.TYPE_DANGER,
-	            message: 'Please input a working fiddle to continue',
-	            buttons: [{
-	                label: 'Cancel',
-	                action: function(dialog) {
-	                	dialog.close();
-	                }
-	            }]
-	        });
+				title: 'Invalid Fiddle',
+				type: BootstrapDialog.TYPE_DANGER,
+				message: 'Please input a working fiddle to continue',
+				buttons: [{
+					label: 'Cancel',
+					action: function(dialog) {
+						dialog.close();
+					}
+				}]
+			});
 		} else {
 			return true;
 		}
