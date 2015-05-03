@@ -40,6 +40,11 @@ var nwApp = {
 		actions.find('#nw-zen').on('click', function() {
 			nwApp.zenAction(jsFiddle, win);
 		});
+		var right = jsFiddle.find('.actionCont.right');
+		right.append('<li class="actionItem"><a id="nw-fullscreen" class="aiButton" href="#nw-fullscreen" title="Fullscreen"><span class="icon-fullscreen"></span></a></li>');
+		right.find('#nw-fullscreen').on('click', function() {
+			nwApp.fullscreenAction(jsFiddle, win);
+		});
 		var credits = jsFiddle.find('.ebCont:last');
 		credits.append('<p><strong>nwFiddle</strong></p><p>Created and maintained by Brad Metcalf (brad@localabstract.com)<br />Github: baconface</p>');
 	},
@@ -92,19 +97,47 @@ var nwApp = {
 				win.closeDevTools();
 			});
 		} else {
+			$('#devtools').attr('src', '');
 			$('#jsfiddle').css('height', '100%');
 			$('#devtools').css('height', '0%');
 		}
 	},
 
 	zenAction: function(jsFiddle, win) {
-		var sidebar = jsFiddle.find('#sidebar');
+		var actions = jsFiddle.find('.actionCont');
 		var icon = jsFiddle.find('#nw-zen span');
 		if(icon.attr('class') == 'icon-th-large') {
 			icon.attr('class', 'icon-remove');
+			var sidebar = jsFiddle.find('#nw-sidebar span');
+			if(sidebar.attr('class') == 'icon-chevron-left') {
+				nwApp.sidebarAction(jsFiddle);
+			}
+			if($('#devtools').height() > 0) {
+				nwApp.devtoolsAction(win);
+			}
+			actions.find('.actionItem').each(function() {
+				$(this).css('display', 'none');
+			});
+			actions.find('#run').parent().css('display', 'block');
+			actions.find('#nw-zen').parent().css('display', 'block');
 			win.enterFullscreen();
 		} else {
 			icon.attr('class', 'icon-th-large');
+			nwApp.sidebarAction(jsFiddle);
+			actions.find('.actionItem').each(function() {
+				$(this).css('display', 'block');
+			});
+			win.leaveFullscreen();
+		}
+	},
+
+	fullscreenAction: function(jsFiddle, win) {
+		var icon = jsFiddle.find('#nw-fullscreen span');
+		if(icon.attr('class') == 'icon-fullscreen') {
+			icon.attr('class', 'icon-resize-small');
+			win.enterFullscreen();
+		} else {
+			icon.attr('class', 'icon-fullscreen');
 			win.leaveFullscreen();
 		}
 	},
