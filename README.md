@@ -8,7 +8,7 @@ Features include:
 * Ability to use local files
 * Ability to test NW.js supported node.js/io.js code
 * Sidebar hiding
-* Zen Mode
+* Zen Mode ([Preview](http://localabstract.com/zenmode.png))
 * Fullscreen mode
 * Dev tool launcher
 * Everything jsFiddle has to offer
