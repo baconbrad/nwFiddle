@@ -1,5 +1,7 @@
 # nwFiddle
 
+[![Join the chat at https://gitter.im/baconface/nwFiddle](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/baconface/nwFiddle?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 ## Introduction
 
 nwFiddle is a quick, ~~no~~ some thrills way to test NW.js code on jsFiddle. Now you can have all the wonderful helpful features of jsFiddle to help aid you in prototyping and troubleshooting NW.js code.
