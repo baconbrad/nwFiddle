@@ -9,12 +9,13 @@ Features include:
 * Ability to test NW.js supported node.js/io.js code
 * Sidebar hiding
 * Zen Mode
+* Fullscreen mode
 * Dev tool launcher
+* Everything jsFiddle has to offer
 * Ability to hack at the jsFiddle UI*
 * Ability to extend jsFiddle's features*
-* Everything jsFiddle has to offer
 
-    \* Currently these can only be done by modifying the nwFiddle source
+\* Currently the last two can only be done by modifying the nwFiddle source
 
 ## Security Notice
 
