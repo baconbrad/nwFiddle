@@ -8,9 +8,9 @@ nwFiddle is a quick, ~~no~~ some thrills way to test NW.js code on jsFiddle. Now
 
 Features include:
 * Ability to use local files
-* Ability to test NW.js supported node.js/io.js code
+* Ability to require() and use NW.js supported node.js/io.js code
 * Sidebar hiding
-* Zen Mode ([Preview](http://localabstract.com/zenmode.png))
+* Zen mode ([Preview](http://localabstract.com/zenmode.png))
 * Fullscreen mode
 * Dev tool launcher
 * Everything jsFiddle has to offer
