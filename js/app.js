@@ -26,7 +26,7 @@ var nwApp = {
 		var actions = jsFiddle.find('.actionCont:eq(1)');
 		actions.prepend('<li class="actionItem"><a id="nw-open" class="aiButton" href="#nw-open" title="Open Fiddle"><span class="icon-file"></span>Open</a></li>');
 		actions.find('#nw-open').on('click', function() {
-			nwApp.openAction(jsFiddle);
+			nwApp.openAction();
 		});
 		actions.append('<li class="actionItem"><a id="nw-sidebar" class="aiButton" href="#nw-sidebar" title="Toggle sidebar"><span class="icon-chevron-left"></span>Sidebar</a></li>');
 		actions.find('#nw-sidebar').on('click', function() {
@@ -34,7 +34,7 @@ var nwApp = {
 		});
 		actions.append('<li class="actionItem"><a id="nw-devtools" class="aiButton" href="#nw-devtools" title="Open dev tools"><span class="icon-cog"></span>Dev Tools</a></li>');
 		actions.find('#nw-devtools').on('click', function() {
-			nwApp.devtoolsAction(win);
+			nwApp.devtoolsAction(jsFiddle, win);
 		});
 		actions.append('<li class="actionItem"><a id="nw-zen" class="aiButton" href="#nw-zen" title="Zen Mode"><span class="icon-th-large"></span>Zen Mode</a></li>');
 		actions.find('#nw-zen').on('click', function() {
@@ -49,7 +49,7 @@ var nwApp = {
 		credits.append('<p><strong>nwFiddle</strong></p><p>Created and maintained by Brad Metcalf (brad@localabstract.com)<br />Github: baconface</p>');
 	},
 
-	openAction: function(jsFiddle) {
+	openAction: function() {
 		var dialog = BootstrapDialog.show({
 			title: 'Open Fiddle',
 			message: '<p>Enter a jsFiddle link you wish to open:</p><input type="text" class="form-control" id="nw-open-input" />',
@@ -87,11 +87,12 @@ var nwApp = {
 		}
 	},
 
-	devtoolsAction: function(win) {
+	devtoolsAction: function(jsFiddle, win) {
 		if($('#devtools').height() == 0) {
 			$('#jsfiddle').css('height', '75%');
 			$('#devtools').css('height', '25%');
-			win.showDevTools('jsfiddle', true);
+			var result = jsFiddle.find('#result iframe');
+			win.showDevTools(result[0], true);
 			win.on("devtools-opened", function(url) {
 				$('#devtools').attr('src', url);
 				win.closeDevTools();
