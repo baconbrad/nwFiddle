@@ -19,6 +19,9 @@ Features include:
 
 \* Currently the last two can only be done by modifying the nwFiddle source
 
+
+![Express.JS running in jsFiddle](http://localabstract.com/nwfiddle.png)
+
 ## Setup
 
 If you do not know of NW.js (formerly node-webkit) then you should know this source needs to be ran from a NW.js project. To get started goto the [NW.js website](http://nwjs.io/), download your target machines files, and follow the [packaging instructions provided by NW.js](https://github.com/nwjs/nw.js/wiki/How-to-package-and-distribute-your-apps) using the files you found here as your NW.js project directory.
