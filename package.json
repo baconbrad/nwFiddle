@@ -1,7 +1,11 @@
 {
 	"name": "nwFiddle",
 	"description": "A quick, no thrills way to test NW.js code on jsFiddle",
-	"version": "0.1",
+	"version": "0.1.0",
+	"repository": {
+		"type" : "git",
+		"url" : "https://github.com/baconface/nwFiddle.git"
+	},
 	"main": "index.html",
 	"node-remote": "fiddle.jshell.net,<local>",
 	"window": {
